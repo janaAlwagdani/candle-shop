@@ -28,4 +28,12 @@ This project is licensed under the MIT License.
 
 ## Team
 This project was developed by a group of students as part of a university course assignment. For educational purposes. 
-Project led and primarily developed by Jana Mohammed Alwagdani.
+Project led and primarily developed by Jana Alwagdani.
+Team Members:
+Rayana Aldulaijan
+Shaden AlMatrodi
+Ghala Aldeheem
+Roqayah Bahubail
+Danah Aljowaiser
+Aljoharah Alabdulmohsen
+
