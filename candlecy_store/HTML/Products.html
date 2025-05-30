@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candle Store</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        .out-of-stock {
+            color: red;
+            font-weight: bold;
+        }
+        .gray-out {
+            filter: grayscale(100%);
+            opacity: 0.6;
+            pointer-events: none; /* Prevent interaction with gray-out elements */
+        }
+
+        .containers {
+            display: flex;
+            flex: 1;
+            background-color: #f4f2ea; 
+        }
+        .sidebar {
+            width: 150px;
+            background: #222;
+            color: white;
+            padding: 25px;
+            height: 600vh;
+            transition: transform 0.3s ease;
+            
+        }
+        .sidebar.hidden {
+            transform: translateX(-100%);
+        }
+        .sidebar h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0px;
+            display: flex;
+            align-items: center;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: color 0.3s;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .sidebar ul li a:hover {
+            background: #f4f2ea;
+            color: #222;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 50px;
+            text-align: center;
+        }
+        .products {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping to the next row */
+            gap: 15px; /* Add spacing between products */
+            justify-content: flex-end; /* Align products to the right */
+            flex-direction: row-reverse; /* Arrange products from right to left */
+            width: 100%; /* Ensure it spans the full width */
+            box-sizing: border-box; /* Include padding and border in width calculations */
+        }
+        .product {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+            flex: 1 1 calc(30% - 25px); /* Each product takes 1/3 of the row minus spacing */
+            max-width: calc(30% - 30px); /* Prevent products from exceeding 1/3 of the row */
+            box-sizing: border-box; /* Include padding and border in width calculations */
+            margin-left: 1cm;
+         
+        }
+        .product:hover {
+            transform: scale(1.05);
+        }
+        .product img {
+            width: 100%; /* Ensure images fit within the product container */
+            border-radius: 5px;
+        }
+        .product h3 {
+            margin: 15px 0 10px;
+        }
+        .product p {
+            color: #777;
+        }
+        .product button {
+            font-family: 'Cormorant Garamond', serif;
+            background: rgb(109, 108, 108);
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .product button:hover {
+            background: #f4f2ea;
+        }
+        .toggle-sidebar {
+            display: none;
+        }
+        .toggle-sidebar-label {
+            position: fixed;
+            top: 60px;
+            left: 10px;
+            background: #222;
+            color: white;
+            padding: 15px 20px; 
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1000;
+            font-size: 1.2rem;
+        }
+        .toggle-sidebar:checked ~ .containers .sidebar {
+            transform: translateX(-100%);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-content: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 15px;
+            border-radius: 20px;
+            width: 50%;
+            text-align: center;
+            position: relative;
+        }
+        
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .center-list {
+            display: flex; 
+            justify-content: center; 
+        }
+        .cart-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            z-index: 1000;
+            width: 50px;
+            height: 50px; 
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../images/W_logo.png" alt="Candlecy Logo">
+            <h1>Candlecy</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Products.html" class="category-button" data-category="products">Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="Admin.html">Admin</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+                <li><a href="Help.html">Help</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <input type="checkbox" id="toggle-sidebar" class="toggle-sidebar">
+    <label for="toggle-sidebar" class="toggle-sidebar-label">☰</label>
+    <div class="containers">
+        <div class="sidebar">
+            <div class="categories">
+                <h2>Categories</h2>
+                <button class="slider-link" data-target="#classics" style="background: none; border: none; font-family: 'Cormorant Garamond', serif; color: white; cursor: pointer; font-size: 1.1rem; margin-bottom: 30px; margin-top: 20px;">Essential Candles</button>
+                <button class="slider-link" data-target="#winter" style="background: none; border: none; font-family: 'Cormorant Garamond', serif; color: white; cursor: pointer; font-size: 1.1rem; margin-bottom: 30px;">Winter Collection</button>
+            </div>
+        </div>
+
+        <main>
+            <!-- Essential Candles Section -->
+            <section id="classics">
+                <h1 style="text-align: center;">Our Classics Essential Candles</h1>
+                <div style="display: flex; justify-content: center; gap: 0px;">
+                    <img src="../images/Classic/Ess1.png" alt="Essential Candle 1" style="width: 100%; height: auto; max-width: 500px;">
+                    <img src="../images/Classic/Ess2.png" alt="Essential Candle 2" style="width: 100%; height: auto; max-width: 500px;">
+                </div>
+                <div class="products"></div>
+            </section>
+
+            <!-- Winter Collection Section -->
+            <section id="winter">
+                <h1 style="text-align: center;">Our Winter Collection</h1>
+                <div style="display: flex; justify-content: center; gap: 0px;">
+                    <img src="../images/Winter/WinterCollection1.png" alt="Winter Collection 1" style="width: 100%; height: auto; max-width: 500px;">
+                    <img src="../images/Winter/WinterCollection2.png" alt="Winter Collection 2" style="width: 100%; height: auto; max-width: 500px;">
+                </div>
+                <div class="products"></div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Candlecy, Candle Store. All rights reserved.</p>
+        <div class="social-media" style="display: flex; gap: 1px; justify-content: center; flex-wrap: wrap;">
+            <a href="https://www.SnapChat.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/Snap.png" alt="Snapchat" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+            <a href="https://www.x.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/X.png" alt="X" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+            <a href="https://www.instagram.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/insta.png" alt="Instagram" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+            <a href="https://www.tiktok.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/tiktok.png" alt="TikTok" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for sidebar buttons
+        document.querySelectorAll('.slider-link').forEach(button => {
+            button.addEventListener('click', function () {
+                const targetId = this.getAttribute('data-target');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const essentialContainer = document.querySelector('#classics .products');
+            const winterContainer = document.querySelector('#winter .products');
+
+            // Fetch products from the server
+            fetch('../PHP/fetch_products.php')
+                .then(response => response.json())
+                .then(data => {
+                    const { essential, winter } = data;
+
+                    // Display Essential products
+                    essential.forEach(product => {
+                        const productElement = document.createElement('div');
+                        productElement.classList.add('product');
+
+                        if (parseInt(product.productStock) === 0) {
+                            // Gray-out logic for out-of-stock products
+                            productElement.innerHTML = `
+                                <div style="position: relative;">
+                                    <img src="../${product.productImage}" alt="${product.productName}" class="gray-out">
+                                    <div style="position: absolute; top: 10px; left: 10px; background: red; color: white; padding: 5px; border-radius: 5px;">Sold Out!</div>
+                                </div>
+                                <h3 class="gray-out">${product.productName}</h3>
+                                <p class="price"><img src="../images/Saudi_Riyal_Symbol.png" alt="Riyal" style="width: 20px; height: 20px;"> ${product.productPrice}</p>
+                            `;
+                        } else {
+                            // Normal display for in-stock products
+                            productElement.innerHTML = `
+                                <img src="../${product.productImage}" alt="${product.productName}">
+                                <h3>${product.productName}</h3>
+                                <p class="price"><img src="../images/Saudi_Riyal_Symbol.png" alt="Riyal" style="width: 20px; height: 20px;"> ${product.productPrice}</p>
+                                <button onclick="redirectToDetails(${product.productID})">View</button>
+                            `;
+                        }
+
+                        essentialContainer.appendChild(productElement);
+                    });
+
+                    // Display Winter Collection products
+                    winter.forEach(product => {
+                        const productElement = document.createElement('div');
+                        productElement.classList.add('product');
+
+                        if (parseInt(product.productStock) === 0) {
+                            // Gray-out logic
+                            productElement.innerHTML = `
+                                <div style="position: relative;">
+                                    <img src="../${product.productImage}" alt="${product.productName}" class="gray-out">
+                                    <div style="position: absolute; top: 10px; left: 10px; background: red; color: white; padding: 5px; border-radius: 5px;">Sold Out!</div>
+                                </div>
+                                <h3 class="gray-out">${product.productName}</h3>
+                                <p class="price"><img src="../images/Saudi_Riyal_Symbol.png" alt="Riyal" style="width: 20px; height: 20px;"> ${product.productPrice}</p>
+                            `;
+                        } else {
+                            // Normal display for in-stock products
+                            productElement.innerHTML = `
+                                <img src="../${product.productImage}" alt="${product.productName}">
+                                <h3>${product.productName}</h3>
+                                <p class="price"><img src="../images/Saudi_Riyal_Symbol.png" alt="Riyal" style="width: 20px; height: 20px;"> ${product.productPrice}</p>
+                                <button onclick="redirectToDetails(${product.productID})">View</button>
+                            `;
+                        }
+
+                        winterContainer.appendChild(productElement);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching products:', error);
+                });
+        });
+
+    
+        function addToCart(productID, productName, productImage, productPrice) {
+            const product = {
+                product_id: productID,
+                product_name: productName,
+                product_image: productImage,
+                product_price: productPrice,
+                product_quantity: 1 // Default quantity is 1
+            };
+
+            // Send the product data to the backend
+            fetch('../PHP/add_to_cartDirectly.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(product)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert(result.message || 'Product added to cart!');
+                } else {
+                    alert('Failed to add product to cart: ' + result.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error adding product to cart:', error);
+                alert('An error occurred. Please try again.');
+            });
+        }
+
+        function redirectToDetails(productID) {
+            window.location.href = `Details.html?id=${productID}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Modify Product</title>
+    <link rel="stylesheet" href="../css/styles.css"/>
+    <link rel="stylesheet" href="../css/AdminStyle.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet"/>
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4); /* Dim background */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            width: 300px; /* Adjust width */
+            max-width: 90%; /* Ensure it fits smaller screens */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .modal-content h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .modal-content p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .modal-content .accept,
+        .modal-content .cancel {
+            margin: 5px;
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal-content .accept {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .modal-content .cancel {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../images/W_logo.png" alt="Candlecy Logo"/>
+            <h1>Candlecy</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Products.html">Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="Admin.html">Admin</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+                <li><a href="Help.html">Help</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Modify Product</h2>
+
+        <div class="search-container" style="display: flex; align-items: center; gap: 5px;">
+            <input type="text" id="search-input" placeholder="Enter Product ID..." style="flex: 1; width: 250px;"/>
+            <button onclick="searchProduct()" style="display: flex; align-items: center; justify-content: center;">
+                <img src="../images/search_icon.png" alt="Search" style="width: 20px; height: auto;"/>
+            </button>
+        </div>
+
+        <div id="searchPopup" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeSearchPopup()">&times;</span>
+                <h2 id="searchProductTitle"></h2>
+                <img id="searchProductImage" src="images/" alt="Product Image"/>
+                <p id="searchProductDescription"></p>
+                <p class="price" id="searchProductPrice"></p>
+                <div>
+                    <button onclick="confirmProduct()" class="accept">Accept</button>
+                    <button onclick="closeSearchPopup()" class="cancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="productList" class="product-list"></div>
+
+        <form id="modifyProductForm" enctype="multipart/form-data" method="POST" action="../PHP/modify_product.php">
+            <div class="form-group">
+                <input type="text" id="productId" name="productID" placeholder="Product ID" required />
+                <input type="text" id="productName" name="productName" placeholder="Product Name" required />
+                <input type="number" id="productStock" name="productStock" placeholder="Stock" min="0" required />
+                <input type="number" id="productPrice" name="productPrice" placeholder="Price" min="0" step="0.01" min="0" required />
+                <input type="text" id="productDescription" name="productDescription" placeholder="Product Description" required />
+                <input type="file" id="productImage" name="productImage" />
+            </div>
+            <button type="submit">Modify Product</button>
+        </form>
+
+        <button onclick="location.href='admin_dashboard.html'">Back</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Candlecy, Candle Store. All rights reserved.</p>
+        <div class="social-media" style="display: flex; gap: 1px; justify-content: center; flex-wrap: wrap;">
+            <a href="https://www.SnapChat.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/Snap.png" alt="snap" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+            <a href="https://www.x.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/X.png" alt="X" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+            <a href="https://www.instagram.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/insta.png" alt="Instagram" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+            <a href="https://www.tiktok.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/tiktok.png" alt="TikTok" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        let products = JSON.parse(localStorage.getItem('products')) || [];
+
+        function displayProducts(filteredProducts) {
+            const productList = document.getElementById('productList');
+            productList.innerHTML = '';
+            if (filteredProducts.length === 0) {
+                productList.innerHTML = '<p>No products found.</p>';
+                return;
+            }
+            filteredProducts.forEach(product => {
+                const div = document.createElement('div');
+                div.classList.add('product-item');
+                div.innerHTML = `
+                    <p>ID: ${product.id}</p>
+                    <p>Name: ${product.name}</p>
+                    <p>Stock: ${product.stock}</p>
+                    <p>Price: ${product.price}</p>
+                    <p>Description: ${product.description}</p>
+                    <p><img src="../images/${product.image}" alt="${product.name}" style="width: 50px;"></p>
+                `;
+                productList.appendChild(div);
+            });
+        }
+
+        // Function to search for a product by ID
+        function searchProduct() {
+            const input = document.getElementById('search-input').value.trim();
+            const productId = parseInt(input);
+
+            if (isNaN(productId)) {
+                alert('Please enter a valid Product ID.');
+                return;
+            }
+
+            // Fetch product data from the database (replace with your backend API)
+            fetch(`../PHP/Get_Mod.php?id=${productId}`)
+                .then(response => response.json())
+                .then(product => {
+                    if (product.success) {
+                        // Populate the pop-up with product details
+                        document.getElementById('searchProductTitle').textContent = product.data.productName;
+                        let productImagePath = product.data.productImage;
+
+                        // Remove duplicate "images/" if it exists
+                        if (productImagePath.startsWith('images/')) {
+                            productImagePath = productImagePath.replace('images/', '');
+                        }
+
+                        // Set the correct image path
+                        document.getElementById('searchProductImage').src = '../images/' + productImagePath;
+                        document.getElementById('searchProductDescription').textContent = product.data.productDescription;
+                        document.getElementById('searchProductPrice').innerHTML =
+                            `<img src="../images/Saudi_Riyal_Symbol.png" alt="SAR" style="width: 20px;"> ${product.data.productPrice}`;
+                        document.getElementById('searchPopup').style.display = 'flex';
+                        document.getElementById('searchPopup').dataset.selectedProduct = JSON.stringify(product.data);
+                    } else {
+                        alert('Product not found!');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching product:', error);
+                    alert('An error occurred while searching for the product.');
+                });
+        }
+
+        // Function to close the search pop-up
+        function closeSearchPopup() {
+            document.getElementById('searchPopup').style.display = 'none';
+        }
+
+        // Function to confirm the selected product and fill the form fields
+        function confirmProduct() {
+            const product = JSON.parse(document.getElementById('searchPopup').dataset.selectedProduct);
+
+            // Fill the form fields with the product data
+            document.getElementById('productId').value = product.productID;
+            document.getElementById('productName').value = product.productName;
+            document.getElementById('productStock').value = product.productStock;
+            document.getElementById('productPrice').value = product.productPrice;
+            document.getElementById('productDescription').value = product.productDescription;
+
+            // Close the pop-up
+            closeSearchPopup();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            displayProducts(products);
+
+            document.getElementById('modifyProductForm').addEventListener('submit', function (event) {
+                const productId = document.getElementById('productId').value.trim();
+                const productName = document.getElementById('productName').value.trim();
+                const productStock = document.getElementById('productStock').value.trim();
+                const productPrice = document.getElementById('productPrice').value.trim();
+                const productDescription = document.getElementById('productDescription').value.trim();
+
+                if (!productId || !productName || !productStock || !productPrice || !productDescription) {
+                    event.preventDefault();
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

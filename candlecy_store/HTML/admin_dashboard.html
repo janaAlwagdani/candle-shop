@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/AdminStyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../images/W_logo.png" alt="Candlecy Logo">
+            <h1>Candlecy</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Products.html">Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="Admin.html">Admin</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+                <li><a href="Help.html">Help</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Admin Dashboard</h2>
+        <button onclick="location.href='add_product.html'">Add Product</button>
+        <button onclick="location.href='modify_product.html'">Modify Product</button>
+        <button onclick="location.href='delete_product.html'">Delete Product</button>
+        <button class="logout-button" onclick="location.href='Home.html'">Logout</button>
+    </div>
+</body>
+<footer>
+    <p>&copy; 2025 Candlecy, Candle Store. All rights reserved.</p>
+    <div class="social-media" style="display: flex; gap: 1px; justify-content: center; flex-wrap: wrap;"></div>
+        <a href="https://www.SnapChat.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+        <img src="../images/footer/Snap.png" alt="snap" style="width: 60px; height: auto; inline-size: 1.2cm; ">
+        </a>
+        <a href="https://www.x.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+        <img src="../images/footer/X.png" alt="X" style="width: 60px; height: auto; inline-size: 1.2cm; ">
+        </a>
+        <a href="https://www.instagram.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+        <img src="../images/footer/insta.png" alt="Instagram" style="width: 60px; height: auto; inline-size: 1.2cm; ">
+        </a>
+        <a href="https://www.tiktok.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+        <img src="../images/footer/tiktok.png" alt="TikTok" style="width: 60px; height: auto; inline-size: 1.2cm; ">
+        </a>
+    </div>
+</footer>
+</html>

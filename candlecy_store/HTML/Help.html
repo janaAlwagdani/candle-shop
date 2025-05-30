@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        .help-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .faq-section ul li {
+            margin-bottom: 15px;
+        }
+
+        .support-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .support-section ul li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../images/W_logo.png" alt="Candlecy Logo">
+            <h1>Candlecy</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Products.html">Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="Admin.html">Admin</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+                <li><a href="Help.html" class="active">Help</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 0px; padding: 0px;">
+        <script>
+            const homeImages = ['Home1.png', 'Home2.png', 'Home1.png', 'Home2.png','Home1.png', 'Home2.png', 'Home1.png', 'Home2.png'];
+            const container = document.currentScript.parentElement;
+            homeImages.forEach(image => {
+            const img = document.createElement('img');
+            img.src = `../images/Home/${image}`;
+            img.alt = `Home Collection ${image}`;
+            img.style = "width: 100%; height: auto; max-width: 160px;";
+            container.appendChild(img);
+            });
+        </script>
+    </div>
+    <div class="help-container">
+        <h2><strong>Help & Support</strong></h2>
+        <p>Welcome to the Candlecy Help Center. Below, you'll find answers to common questions and additional support resources.</p>
+
+        <div class="faq-section">
+            <h3>Frequently Asked Questions</h3>
+            <ul class="faq-list">
+                <li>
+                    <details>
+                        <summary>Why Candlecy?</summary>
+                        <div class="center-list">
+                            <ul class="green-checklist">
+                                <li><span class="check">&#10003;</span><strong>100% Organic</strong>: Made with natural waxes like soy and beeswax.</li>
+                                <li><span class="check">&#10003;</span><strong>Non-Toxic</strong>: Free from harmful chemicals and synthetic fragrances.</li>
+                                <li><span class="check">&#10003;</span><strong>Eco-Friendly</strong>: Biodegradable and sustainable.</li>
+                                <li><span class="check">&#10003;</span><strong>Safe & Clean</strong>: No harmful fumes, perfect for your home.</li>
+                                <li><span class="check">&#10003;</span><strong>Cruelty-Free</strong>: Ethically sourced and not tested on animals.</li>
+                                <li><span class="check">&#10003;</span><strong>Recyclable</strong>: Packaging made from recycled materials.</li>
+                            </ul>
+                        </div>
+                    </details>
+                </li>
+                <li>
+                    <details>
+                        <summary>How do I place an order?</summary>
+                        <p>To place an order, browse our <a href="Products.html">Products</a> page, add items to your cart, and proceed to checkout.</p>
+                    </details>
+                </li>
+                <li>
+                    <details>
+                        <summary>What payment methods do you accept?</summary>
+                        <p>We accept all major credit cards, PayPal, and secure online payments.</p>
+                        <img src="../images/Cart/payments.png" alt="Secure Payment" style="width: 100%; height: auto; max-width: 125px; margin-top: -10px;">
+                    </details>
+                </li>
+                <li>
+                    <details>
+                        <summary>How can I track my order?</summary>
+                        <p>Once your order is shipped, you will receive a tracking number via email. Use it to track your order on the <a href="https://www.aramex.com/">Aramex website</a> for more details.</p>
+                    </details>
+                </li>
+                <li>
+                    <details>
+                        <summary>How long does shipping take?</summary>
+                        <p>Orders are processed within 3 business days. Standard shipping takes 3-7 business days, while express shipping takes 1-3 business days.</p>
+                    </details>
+                </li>
+                <li>
+                    <details>
+                        <summary>What is your return policy?</summary>
+                        <p>We offer a 10-day return policy for unused candles in their original packaging.</p>
+                    </details>
+                </li>
+                <li>
+                    <details>
+                        <summary>How do I change or cancel my order?</summary>
+                        <p>If you need to change or cancel your order, please contact us within 24 hours of placing your order.</p>
+                    </details>
+                </li>
+                <li>
+                    <details>
+                        <summary>Are your candles eco-friendly?</summary>
+                        <p>Yes, all our candles are made with natural, eco-friendly ingredients and are cruelty-free.</p>
+                    </details>
+                </li>
+                <li>
+                    <details>
+                        <summary>How can I contact customer support?</summary>
+                        <p>You can reach us via email at <a href="mailto:support@candlecy.com">support@candlecy.com</a> or call us at (123) 456-7890.</p>
+                    </details>
+                </li>
+                <li>
+                    <details>
+                        <summary>Do you offer gift cards?</summary>
+                        <p>Yes, we offer gift cards that can be purchased on our website. They make perfect gifts for any occasion!</p>
+                    </details>
+                </li>
+            </ul>
+        </div>
+
+        <div class="support-section">
+            <h3>Need More Help?</h3>
+            <p>If you have additional questions or need further assistance, please don't hesitate to contact us:</p>
+            <ul>
+                <li>Email: <a href="mailto:support@candlecy.com">support@candlecy.com</a></li>
+                <li>Phone: (123) 456-7890</li>
+                <li>Live Chat: Available 9 AM - 5 PM (Mon-Fri)</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Candlecy, Candle Store. All rights reserved.</p>
+        <div class="social-media" style="display: flex; gap: 1px; justify-content: center; flex-wrap: wrap;">
+            <a href="https://www.SnapChat.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/Snap.png" alt="snap" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+            <a href="https://www.x.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/X.png" alt="X" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+            <a href="https://www.instagram.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/insta.png" alt="Instagram" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+            <a href="https://www.tiktok.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/tiktok.png" alt="TikTok" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
+

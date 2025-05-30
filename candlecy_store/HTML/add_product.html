@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/AdminStyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../images/W_logo.png" alt="Candlecy Logo">
+            <h1>Candlecy</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Products.html">Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="Admin.html">Admin</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+                <li><a href="Help.html">Help</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Add Product</h2>
+        <form id="addProductForm" enctype="multipart/form-data">
+            <input type="number" id="productId" placeholder="Product ID" required>
+            <input type="text" id="productName" placeholder="Product Name" required>
+            <input type="number" id="productStock" placeholder="Stock" min="0" required>
+            <input type="number" id="productPrice" placeholder="Price" min="0" step="0.01"required>
+            <textarea id="productDescription" placeholder="Product Description" required></textarea>
+            <input type="file" id="productImage" name="productImage" required accept="image/*">
+            <button type="submit">Add Product</button>
+        </form>
+        <button onclick="location.href='admin_dashboard.html'">Back</button>
+    </div>
+
+    <script>
+        document.getElementById('addProductForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData();
+            formData.append('id', document.getElementById('productId').value);
+            formData.append('name', document.getElementById('productName').value.trim());
+            formData.append('stock', document.getElementById('productStock').value.trim());
+            formData.append('price', document.getElementById('productPrice').value.trim());
+            formData.append('description', document.getElementById('productDescription').value.trim());
+            formData.append('image', document.getElementById('productImage').files[0]);
+
+            // Check if an image file is selected and is valid
+            const fileInput = document.getElementById('productImage');
+            const file = fileInput.files[0];
+            if (file) {
+                const fileSize = file.size / 1024 / 1024; // size in MB
+                const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+
+                // Check file size (max 5MB) and file type
+                if (fileSize > 5) {
+                    alert('File size is too large. Maximum allowed size is 5MB.');
+                    return;
+                }
+
+                if (!validTypes.includes(file.type)) {
+                    alert('Invalid file type. Only JPEG, PNG, and GIF are allowed.');
+                    return;
+                }
+            }
+
+            fetch('../PHP/add_product.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert(result.message);
+                    window.location.href = 'Products.html'; // Redirect to the products page
+                } else {
+                    alert('Error: ' + result.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error adding product:', error);
+                alert('An error occurred while adding the product.');
+            });
+        });
+    </script>
+
+    <footer>
+        <p>&copy; 2025 Candlecy, Candle Store. All rights reserved.</p>
+        <div class="social-media" style="display: flex; gap: 1px; justify-content: center; flex-wrap: wrap;">
+            <a href="https://www.SnapChat.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/Snap.png" alt="snap" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+            <a href="https://www.x.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/X.png" alt="X" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+            <a href="https://www.instagram.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/insta.png" alt="Instagram" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+            <a href="https://www.tiktok.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/tiktok.png" alt="TikTok" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+        </div>
+    </footer>
+</body>
+</html>

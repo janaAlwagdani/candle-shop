@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .product-container {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .product-container img {
+            width: 100px;
+            height: auto;
+            margin-right: 10px;
+            border-radius: 8px;
+        }
+        .product-details {
+            text-align: left;
+            flex-grow: 1;
+        }
+        .product-details h3 {
+            margin: 0;
+            font-size: 12px; 
+        }
+        .product-details p {
+            margin: 5px 0;
+            font-size: 12px; 
+        }
+        h2 {
+            color: #777;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 15px 50px; 
+            background-color: #1e1f20;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #a4a096;
+        }
+        .link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .link a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .link a:hover {
+            text-decoration: underline;
+        }
+        .product {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .product img {
+            width: 60px; 
+            height: 60px;
+            border-radius: 5px;
+            object-fit: cover; 
+        }
+        .product-details {
+            flex-grow: 1;
+            margin-left: 10px;
+        }
+        .quantity-input {
+            width: 60px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .total-price {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .return-button {
+            font-family: 'Cormorant Garamond', serif;
+            background: rgb(109, 108, 108);
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .return-button:hover {
+            background-color: #f4f2ea;
+            color: #000;
+        }
+        .thank-you-container {
+            display: none;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            z-index: 1000;
+        }
+        .thank-you-container img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .thank-you-container h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .thank-you-container p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .thank-you-container button {
+            padding: 10px 20px;
+            background-color: #1e1f20;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .thank-you-container button:hover {
+            background-color: #a4a096;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .center-list {
+            display: flex; 
+            justify-content: center; 
+        }
+        .delete-icon {
+            color: red;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 10px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            transition: transform 0.2s ease;
+        }
+
+        .delete-icon:hover {
+            transform: scale(1.2);
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 40%;
+            margin: 0 auto;
+            padding: 20px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../images/W_logo.png" alt="Candlecy Logo">
+            <h1>Candlecy</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Products.html">Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="Admin.html">Admin</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+                <li><a href="Help.html">Help</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Checkout</h2>
+        <div id="product-details" class="products"></div>
+        <div class="total-price" id="total-price"></div>
+        <div class="button-container">
+            <button style="font-family: 'Cormorant Garamond', serif; margin-top: 0.5cm;" id="buyButton">Buy</button>
+            <img src="../images/Cart/payments.png" alt="Secure Payment" style="width: 100%; height: auto; max-width: 125px; margin-top: -1cm;">
+            <p>
+                <div class="center-list" style="margin-top: -1.8cm;">
+                    <ul class="green-checklist">
+                        <li><span class="check">&#10003;</span>100% secure payment</li>
+                    </ul>
+                </div>
+            </p>
+            <button style="font-family: 'Cormorant Garamond', serif;" class="cancel-button" id="cancelButton">Cancel</button>
+        </div>
+    </div>
+
+    <div class="thank-you-container" id="thankYouContainer" style="display: none;">
+        <button class="close-button" onclick="location.href='Home.html'">&times;</button>
+        <img src="../images/W_logo.png" alt="Candlecy Logo">
+        <p>Thank you for shopping with Candlecy. Let our candles be your guiding light.</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Candlecy, Candle Store. All rights reserved.</p>
+        <div class="social-media" style="display: flex; gap: 1px; justify-content: center; flex-wrap: wrap;">
+            <a href="https://www.SnapChat.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/Snap.png" alt="snap" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+            <a href="https://www.x.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/X.png" alt="X" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+            <a href="https://www.instagram.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/insta.png" alt="Instagram" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+            <a href="https://www.tiktok.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/tiktok.png" alt="TikTok" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+        </div>
+    </footer>
+
+    <script>
+    document.getElementById('buyButton').addEventListener('click', function () {
+        fetch('../PHP/move_to_purchases.php', { method: 'POST' })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    // Show the thank-you message
+                    const thankYouContainer = document.getElementById('thankYouContainer');
+                    thankYouContainer.style.display = 'flex';
+
+                    // Clear the checkout table
+                    document.getElementById('product-details').innerHTML = '<p>No products in checkout.</p>';
+                    document.getElementById('total-price').innerHTML = '';
+                } else {
+                    alert('Failed to complete the purchase: ' + result.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error completing the purchase:', error);
+            });
+    });
+
+        document.getElementById('cancelButton').addEventListener('click', function () {
+            fetch('../PHP/add_to_DirectlyCheckout.php', { method: 'DELETE' })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        alert('Checkout canceled. Products removed from the cart.');
+                        window.location.href = 'Products.html'; // Redirect to the Products page
+                    } else {
+                        alert('Failed to cancel checkout: ' + result.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error canceling checkout:', error);
+                });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('../PHP/add_to_DirectlyCheckout.php')
+                .then(response => response.json())
+                .then(products => {
+                    if (products.length > 0) {
+                        const productDetailsContainer = document.getElementById('product-details');
+                        productDetailsContainer.innerHTML = ''; // Clear any existing content
+
+                        products.forEach(product => {
+                            const productHTML = `
+                                <div class="product">
+                                    <img src="${product.productImage}" alt="${product.productName}">
+                                    <div class="product-details">
+                                        <h3>${product.productName}</h3>
+                                        <p>Price: SAR ${product.productPrice}</p>
+                                        <p>Quantity: ${product.productQuantity}</p>
+                                    </div>
+                                </div>
+                            `;
+                            productDetailsContainer.innerHTML += productHTML;
+                        });
+                    } else {
+                        document.getElementById('product-details').innerHTML = '<p>No products in checkout.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching checkout products:', error);
+                });
+        });
+    </script>
+</body>
+</html>

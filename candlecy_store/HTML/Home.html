@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candlecy</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        .hero {
+            background: url('images/hero.jpg') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: rgb(45, 43, 43);
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .hero img {
+            margin-bottom: -50px; 
+        }
+        .hero p {
+            margin-top: 10px; 
+            margin-left: -120px;
+            margin-right: 120px;
+        }
+        .cta {
+            font-family: 'Cormorant Garamond', serif;
+            background: #847f7a;
+            padding: 15px 30px;
+            border: none;
+            cursor: pointer;
+            font-size: 2rem;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s;
+            margin-left: -120px;
+            margin-right: 120px;
+        }
+        .cta:hover {
+            background: #cac8c1;
+        }
+        .content {
+            padding: 50px;
+            text-align: center;
+        }
+      
+        .welcome-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            margin: 1cm 0.5cm; 
+            transition: transform 0.5s; 
+        }
+
+        .welcome-container:hover {
+            transform: scale(1.05); 
+        }
+        .welcome-container h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #222;
+        }
+        .welcome-container p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .history-box {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 20px;
+            background: white;
+            border: 1px solid #979595;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 1000px;
+            width: 400px;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: #222;
+        }
+
+        .history-box div {
+            margin-bottom: 10px;
+        }
+
+        .history-box img {
+            border-radius: 5px;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+            color: red;
+            font-size: 50px;
+            font-weight: bold;
+            margin-right: 0%;
+            margin-top: -5%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../images/W_logo.png" alt="Candlecy Logo">
+            <h1>Candlecy</h1>
+        </div>
+        <nav>
+            <ul style="display: flex; align-items: center; list-style: none; padding: 0; margin: 0;">
+                <li style="margin-right: 15px;"><a href="Home.html">Home</a></li>
+                <li style="margin-right: 15px;"><a href="Products.html" class="category-button" data-category="products">Products</a></li>
+                <li style="margin-right: 15px;"><a href="cart.html">Cart</a></li>
+                <li style="margin-right: 15px;"><a href="Admin.html">Admin</a></li>
+                <li style="margin-right: 15px;"><a href="Contact.html">Contact</a></li>
+                <li style="margin-right: 15px;"><a href="Help.html">Help</a></li>
+                <li style="margin-right: 15px;">
+                    <div style="display: flex; align-items: center; justify-content: center; padding: 10px; border-radius: 8px; background-color: white; cursor: pointer;" onclick="toggleHistory()">
+                        <img src="../images/Home/order-history-icon.png" alt="Purchase History" class="purchase-icon social-media" style="width: 25px; height: auto;">
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <div id="purchase-history" class="history-box" style="display: none;">
+            <span class="close-button" onclick="toggleHistory()">&times;</span>
+            <h3 style="text-align: center; margin-bottom: 10px;">Purchase History:</h3>
+            <div id="purchase-list"></div>
+        </div>
+    </header>
+    <section class="hero">
+        <img src="../images/logo.png" alt="Candlecy Logo" width="650">
+        <div>
+            <p>Discover the Perfect Ambiance with Our Premium Candles</p>
+            <button class="cta" onclick="location.href='Products.html'">Shop Now</button>
+        </div>
+    </section>
+    <section class="content">
+        <h2>Welcome to Our Candle Store Candlecy</h2>
+        <p>Explore our carefully curated collection of luxury candles, designed to bring warmth and relaxation to your space.</p>
+    </section>
+    <div style="display: flex; justify-content: center; gap: 20px;">
+        <div class="welcome-container" style="flex: 1; max-width: 45%;">
+            <h1>Candlecy: Where Luxury Meets Comfort</h1>
+            <p>Explore our curated luxury candle collection, crafted to bring warmth and relaxation to your home. Each candle is made with premium natural ingredients, offering a soothing aroma and a clean, long-lasting burn. Whether you're looking to create a cozy ambiance or add a touch of elegance to your space, our candles are the perfect addition to any room. Indulge in the finest scents and experience the ultimate relaxation.</p>
+        </div>
+        <div class="welcome-container" style="flex: 1; max-width: 45%;">
+            <h1>About Us</h1>
+            <p>At Candlecy, our brand name is a blend of <strong>"candles"</strong> and <strong>"legacy,"</strong> reflecting our commitment to creating timeless, high-quality products. We believe in the power of candles to evoke emotions, enhance spaces, and create lasting memories. Every candle we craft is made with care, using the finest natural ingredients to ensure a clean, long-lasting burn and a soothing aroma. Our legacy is built on offering luxury candles that bring warmth, elegance, and relaxation to every home. With Candlecy, you are not just lighting a candle; you’re creating a moment that lasts.</p>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 Candlecy, Candle Store. All rights reserved.</p>
+        <div class="social-media" style="display: flex; gap: 1px; justify-content: center; flex-wrap: wrap;">
+            <a href="https://www.SnapChat.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/Snap.png" alt="snap" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+            <a href="https://www.x.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/X.png" alt="X" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+            <a href="https://www.instagram.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/insta.png" alt="Instagram" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+            <a href="https://www.tiktok.com" target="_blank" style="background-color: white; padding: 1px; border-radius: 8px; display: inline-block;">
+                <img src="../images/footer/tiktok.png" alt="TikTok" style="width: 60px; height: auto; inline-size: 1.2cm;">
+            </a>
+        </div>
+    </footer>
+    <script>
+        function generateID() {
+            return 'guest-' + Math.random().toString(36).substr(2, 9);
+        }
+
+        function getOrCreateGuestID() {
+            let guest_id = localStorage.getItem("guest_id");
+            if (!guest_id) {
+                guest_id = `guest-${Math.random().toString(36).substr(2, 9)}`;
+                localStorage.setItem("guest_id", guest_id);
+            }
+            return guest_id;
+        }
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        function savePurchaseToCookies(purchase) {
+            const guest_id = getOrCreateGuestID();
+            const existingPurchases = JSON.parse(getCookie('pastPurchases') || '[]');
+            existingPurchases.push(purchase);
+            document.cookie = `pastPurchases=${JSON.stringify(existingPurchases)}; path=/; max-age=31536000`; // 1 year
+        }
+
+        function toggleHistory() {
+            const historyBox = document.getElementById('purchase-history');
+            if (historyBox.style.display === 'none') {
+                fetchHistory();
+                historyBox.style.display = 'block';
+            } else {
+                historyBox.style.display = 'none';
+            }
+        }
+
+        function fetchHistory() {
+            const visitorID = getOrCreateGuestID();
+            console.log("Visitor ID being sent:", visitorID);
+
+            fetch(`../PHP/get_purchases.php`)
+                .then(res => res.json())
+                .then(response => {
+                    console.log("Response from server:", response);
+
+                    if (response.success && Array.isArray(response.data)) {
+                        const purchases = response.data;
+
+                        let html = purchases.map(p => `
+                            <div style="margin-bottom: 10px;">
+                                <strong>${p.product_name}</strong><br>
+                                <img src="${p.product_image}" width="60"><br>
+                                ${p.product_price} SAR
+                            </div><hr>
+                        `).join("");
+
+                        document.getElementById("purchase-list").innerHTML = html || "No past purchases.";
+                    } else {
+                        console.error("Invalid response structure:", response);
+                        document.getElementById("purchase-list").innerHTML = "No purchases found.";
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching purchase history:", error);
+                    document.getElementById("purchase-list").innerHTML = "No purchases found.";
+                });
+        }
+
+        function completePurchase() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            console.log("Cart data being sent:", cart); // Debugging line
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            fetch('../PHP/save_purchase.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ cart }) // Ensure the cart is sent as { cart: [...] }
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert(result.message);
+                    localStorage.removeItem('cart'); // Clear the cart
+                    window.location.href = 'Home.html';
+                } else {
+                    alert('Error: ' + result.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error saving purchase:', error);
+            });
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('../PHP/get_purchase_history.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const purchaseHistoryContainer = document.getElementById('purchase-history');
+                        purchaseHistoryContainer.innerHTML = ''; // Clear any existing content
+
+                        if (data.purchases.length > 0) {
+                            data.purchases.forEach(purchase => {
+                                const purchaseHTML = `
+                                    <div class="purchase-item">
+                                        <img src="${purchase.productImage}" alt="${purchase.productName}" style="width: 100px; height: auto;">
+                                        <div>
+                                            <h3>${purchase.productName}</h3>
+                                            <p>Price: SAR ${purchase.productPrice}</p>
+                                            <p>Quantity: ${purchase.productQuantity}</p>
+                                            <p>Date: ${new Date(purchase.purchaseDate).toLocaleString()}</p>
+                                        </div>
+                                    </div>
+                                `;
+                                purchaseHistoryContainer.innerHTML += purchaseHTML;
+                            });
+                        } else {
+                            purchaseHistoryContainer.innerHTML = '<p>No purchase history found.</p>';
+                        }
+                    } else {
+                        console.error('Error fetching purchase history:', data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching purchase history:', error);
+                });
+        });
+    </script>
+</body>
+</html>
